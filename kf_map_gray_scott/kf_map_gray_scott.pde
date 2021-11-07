@@ -1,7 +1,7 @@
 float D_A = 1.0;
 float D_B = 0.5;
-float[] feed_range = {0.0,  0.08}; // $\{f(\mathrm{col}_{\min}), f(\mathrm{col}_{\max})\}$
-float[] kill_range = {0.02, 0.07}; // $\{k(\mathrm{row}_{\min}), k(\mathrm{row}_{\min})\}$
+float[] feed_range = {0.0,  0.08}; // $\{f(\mathrm{row}_{\min}), f(\mathrm{row}_{\max})\}$
+float[] kill_range = {0.02, 0.07}; // $\{k(\mathrm{col}_{\min}), k(\mathrm{col}_{\min})\}$
 float[][][] grid;
 float[][][] next;
 float[][] kernel = {{0.083333,  0.166667, 0.083333},
