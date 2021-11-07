@@ -1,7 +1,7 @@
 float D_A = 1.0;
 float D_B = 0.5;
 float[] feed_range = {0.0,  0.08}; // $\{f(\mathrm{col}_{\min}), f(\mathrm{col}_{\max})\}$
-float[] kill_range = {0.02, 0.07}; // $\{k(\mathrm{row}_{\min}), f(\mathrm{row}_{\min})\}$
+float[] kill_range = {0.02, 0.07}; // $\{k(\mathrm{row}_{\min}), k(\mathrm{row}_{\min})\}$
 float[][][] grid;
 float[][][] next;
 float[][] kernel = {{0.083333,  0.166667, 0.083333},
@@ -15,11 +15,11 @@ color colormap(float cell[]) {
   return color(240.0/360.0*(cell[0]-cell[1]), 1.0, 1.0);
 }
 
-float kill(int row, int col) { // Axe $x$
+float kill(int col) { // Axe $x$
   return lerp(kill_range[0], kill_range[1], float(col)/width);
 }
 
-float feed(int row, int col) { // Axe $y$
+float feed(int row) { // Axe $y$
   return lerp(feed_range[0], feed_range[1], float(height-1-row)/height);
 }
 
@@ -68,8 +68,8 @@ void draw() {
     for (int row = 0; row < height; row++) {
       float A = grid[col][row][0];
       float B = grid[col][row][1];
-      next[col][row][0] = A + D_A*laplacian(row, col, 0) - A*B*B + feed(row, col)*(1 - A);
-      next[col][row][1] = B + D_B*laplacian(row, col, 1) + A*B*B - (kill(row, col) + feed(row, col))*B;
+      next[col][row][0] = A + D_A*laplacian(row, col, 0) - A*B*B + feed(row)*(1 - A);
+      next[col][row][1] = B + D_B*laplacian(row, col, 1) + A*B*B - (kill(col) + feed(row))*B;
       next[col][row][0] = constrain(next[col][row][0], 0.0, 1.0);
       next[col][row][1] = constrain(next[col][row][1], 0.0, 1.0);
     }
