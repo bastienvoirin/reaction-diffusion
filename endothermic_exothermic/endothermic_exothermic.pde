@@ -26,7 +26,7 @@ color colormap_top(float cell[]) {
   return color(cell[0]-cell[1]);
 }
 
-// Bleu ($T = \num{1}$ à rouge ($T = \num{2}$) en passant par blanc ($T = \num{1.5}$)
+// Bleu ($T = \num{1}$) à rouge ($T = \num{2}$) en passant par blanc ($T = \num{1.5}$)
 color colormap_mid(float cell[]) {
   colorMode(RGB, 1.0);
   float m = 1.0; // $\min(T)$, bleu
